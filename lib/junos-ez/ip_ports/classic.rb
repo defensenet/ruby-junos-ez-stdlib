@@ -46,10 +46,22 @@ class Junos::Ez::IPports::Provider::CLASSIC < Junos::Ez::IPports::Provider
 
     as_hash[:admin] = as_xml.xpath('disable').empty? ? :up : :down    
     ifa_inet = as_xml.xpath('family/inet')
-    
+
     xml_when_item(as_xml.xpath('vlan-id')){ |i| as_hash[:tag_id] = i.text.to_i }
+
+    # begin dnet additions
+    xml_when_item(as_xml.xpath('tunnel/source')){ |i|
+      as_hash[:source] = i.text
+    }
+    xml_when_item(as_xml.xpath('tunnel/destination')) { |i|
+      as_hash[:destination] = i.text
+    }
+    xml_when_item(as_xml.xpath('tunnel/routing-instance/destination')) { |i|
+      as_hash[:routingdestination] = i.text
+    }
+
     xml_when_item(as_xml.xpath('description')){ |i| as_hash[:description] = i.text }
-    xml_when_item(ifa_inet.xpath('mtu')){ |i| as_hash[:mtu] = i.text.to_i }   
+    xml_when_item(ifa_inet.xpath('mtu')){ |i| as_hash[:mtu] = i.text.to_i }
     
     # @@@ assuming a single IP address; prolly need to be more specific ...
     as_hash[:address] = ifa_inet.xpath('address/name').text || nil

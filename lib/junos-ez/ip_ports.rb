@@ -11,6 +11,9 @@ module Junos::Ez::IPports
     :address,           # ip/prefix as text, e.g. "192.168.10.22/24"
     :acl_in,            # input ACL name
     :acl_out,           # output ACL name
+    :tunnel,
+    :source,
+    :destination
   ]  
 
   def self.Provider( ndev, varsym )            
