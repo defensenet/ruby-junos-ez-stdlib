@@ -12,5 +12,4 @@ Gem::Specification.new do |s|
   s.email = 'jschulman@juniper.net'
   s.files = FileList[ '*', 'lib/**/*.rb', 'examples/**/*.rb', 'docs/**/*.md' ]
   s.add_dependency('netconf', ">= 0.2.5")
-  s.add_dependency('rake', '10.4.2')
 end
