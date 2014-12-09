@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift 'lib'
-#require 'rake'
+require 'rake'
 require 'junos-ez/version'
 
 Gem::Specification.new do |s|
